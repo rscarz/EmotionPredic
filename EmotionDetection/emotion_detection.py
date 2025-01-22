@@ -1,7 +1,6 @@
 import requests
 import json
 
-
 def emotion_detector(text_to_analyse):
 
     url = 'https://sn-watson-emotion.labs.skills.network/v1/watson.runtime.nlp.v1/NlpService/EmotionPredict'
@@ -26,6 +25,16 @@ def emotion_detector(text_to_analyse):
             'sadness': emotion_predictions['sadness'],
             'dominant_emotion': dominant_emotion
         }
+    elif response.status_code == 400:
+            # Return a dictionary with None values for a 400 status code
+            return {
+                'anger': None,
+                'disgust': None,
+                'fear': None,
+                'joy': None,
+                'sadness': None,
+                'dominant_emotion': None
+            }
     else:
         return None
 
